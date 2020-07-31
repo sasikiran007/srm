@@ -15,18 +15,19 @@ public class FCMService {
 
     private Logger logger = LoggerFactory.getLogger(FCMService.class);
 
-    public void sendMessage(Map<String, String> data, PushNotificationRequest request)
-            throws InterruptedException, ExecutionException {
-        Message message = getPreconfiguredMessageWithData(data, request);
-        String response = sendAndGetResponse(message);
-        logger.info("sent message with data. Topic : ", request.getTopic() + "," + response);
-    }
 
-    public void sendMessageWithoutData(PushNotificationRequest request) throws ExecutionException, InterruptedException {
-        Message message = getPreconfiguredMessageWithOutData(request);
-        String response = sendAndGetResponse(message);
-        logger.info("sent message with out data. Topic : ", request.getTopic() + "," + response);
-    }
+//    public void sendMessage(Map<String, String> data, PushNotificationRequest request)
+//            throws InterruptedException, ExecutionException {
+//        Message message = getPreconfiguredMessageWithData(data, request);
+//        String response = sendAndGetResponse(message);
+//        logger.info("sent message with data. Topic : ", request.getTopic() + "," + response);
+//    }
+//
+//    public void sendMessageWithoutData(PushNotificationRequest request) throws ExecutionException, InterruptedException {
+//        Message message = getPreconfiguredMessageWithOutData(request);
+//        String response = sendAndGetResponse(message);
+//        logger.info("sent message with out data. Topic : ", request.getTopic() + "," + response);
+//    }
 
     public void sendMessageToToken(PushNotificationRequest request)
             throws InterruptedException, ExecutionException {
@@ -43,13 +44,13 @@ public class FCMService {
         return getPreconfiguredMessageBuilder(request).setToken(request.getToken()).build();
     }
 
-    private Message getPreconfiguredMessageWithOutData(PushNotificationRequest request) {
-        return getPreconfiguredMessageBuilder(request).setTopic(request.getTopic()).build();
-    }
-
-    private Message getPreconfiguredMessageWithData(Map<String, String> data, PushNotificationRequest request) {
-        return getPreconfiguredMessageBuilder(request).putAllData(data).setTopic(request.getTopic()).build();
-    }
+//    private Message getPreconfiguredMessageWithOutData(PushNotificationRequest request) {
+//        return getPreconfiguredMessageBuilder(request).setTopic(request.getTopic()).build();
+//    }
+//
+//    private Message getPreconfiguredMessageWithData(Map<String, String> data, PushNotificationRequest request) {
+//        return getPreconfiguredMessageBuilder(request).putAllData(data).setTopic(request.getTopic()).build();
+//    }
 
     private Message.Builder getPreconfiguredMessageBuilder(PushNotificationRequest request) {
         AndroidConfig androidConfig = getAndroidConfig(request.getTopic());
